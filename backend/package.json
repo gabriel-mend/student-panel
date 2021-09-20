@@ -1,8 +1,19 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "nodemon src/server.js"
+  },
   "repository": "https://github.com/loadingGabriel/student-panel.git",
-  "author": "Gabriel <gabrielmendoncapereira14@gmail.com>",
-  "license": "MIT"
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.95.11",
+    "pg": "^8.7.1"
+  }
 }
