@@ -1,0 +1,8 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/loadingGabriel/student-panel.git",
+  "author": "Gabriel <gabrielmendoncapereira14@gmail.com>",
+  "license": "MIT"
+}
