@@ -45,7 +45,20 @@ module.exports = {
         phone, 
         andress 
       }).where({ id })
-      return res.status(201).send()
+      return res.send()
+    } catch(error) {
+      next(error)
+    }
+  },
+  async delete(req, res, next) {
+    try {
+      const { id } = req.params
+      
+      await knex('students')
+        .where({ id: id })
+        .del()
+
+      return res.send()
     } catch(error) {
       next(error)
     }
