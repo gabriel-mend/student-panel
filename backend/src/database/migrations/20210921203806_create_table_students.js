@@ -7,6 +7,14 @@ exports.up = (knex) => knex.schema.createTable('students', table => {
   table.text('andress').notNullable()
   table.text('email').unique().notNullable()
   table.text('phone')
+
+  table.integer('user_id')
+    .notNullable()
+    .references('id')
+    .inTable('courses')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE');
+
   table.timestamp('created_at').defaultTo(knex.fn.now())
   table.timestamp('updated_at').defaultTo(knex.fn.now())
 })

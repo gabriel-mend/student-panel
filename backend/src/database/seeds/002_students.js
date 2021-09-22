@@ -11,15 +11,17 @@ exports.seed = function(knex) {
           cep: 65066210,
           cpf: 11122233345,
           phone: 98999999999,
-          andress: 'rua 2'
+          andress: 'rua 2',
+          course_id: 3
         },
         { 
-          username: 'Aluno 1',
+          username: 'Aluno 2',
           email: 'aluno2@gmail.com',
           cep: 65066210,
           cpf: 11122233346,
           phone: 98999999999,
-          andress: 'rua 2'
+          andress: 'rua 2',
+          course_id: 3
         },
       ]);
     });
