@@ -8,8 +8,7 @@ exports.up = (knex) => knex.schema.createTable('students', table => {
   table.text('email').unique().notNullable()
   table.text('phone')
 
-  table.integer('user_id')
-    .notNullable()
+  table.integer('course_id')
     .references('id')
     .inTable('courses')
     .onUpdate('CASCADE')

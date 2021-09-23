@@ -2,9 +2,24 @@ const knex = require('../database')
 
 module.exports = {
   async index(req, res) {
-    const results = await knex('students')
+    try {
+      const { course_id } = req.query
 
-    return res.json(results)
+      const query = knex('students')
+
+      if(course_id) {
+        query
+          .where({ course_id })
+          .join('courses', 'courses.id', '=', 'students.course_id')
+          .select('students.*', 'courses.name')
+      }
+
+      const results = await query 
+
+      return res.json(results)
+    } catch(error) {
+      next(error)
+    }
   },
   async create(req, res, next) {
     try {
@@ -14,10 +29,11 @@ module.exports = {
         cep,
         cpf,
         phone,
-        andress
+        andress,
+        course_id
       } = req.body
 
-      await knex('students').insert({ username, email, cep, cpf, phone, andress })
+      await knex('students').insert({ username, email, cep, cpf, phone, andress, course_id })
 
       return res.status(201).send()
     } catch(error) {
@@ -32,7 +48,8 @@ module.exports = {
         cep,
         cpf,
         phone,
-        andress
+        andress,
+        course_id
       } = req.body
 
       const { id } = req.params
@@ -43,7 +60,8 @@ module.exports = {
         cep, 
         cpf, 
         phone, 
-        andress 
+        andress,
+        course_id
       }).where({ id })
       return res.send()
     } catch(error) {
