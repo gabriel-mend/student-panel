@@ -2,14 +2,15 @@ import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   ${({ theme }) => css`
-    width: 200px;
+    width: 100%;
     height: 100%;
-    max-height: 814px;
     padding: 18px 22px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    position: relative;
 
     border-radius: 24px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
