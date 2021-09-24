@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
     body,
     #__next {
       height: 100%;
+      font-family: 'Baloo Bhaina 2', cursive;
     }
 
     a {

@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
       <title>Student Panel</title>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
-      <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@400;600&family=Roboto&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@400;600;700&family=Roboto&display=swap" rel="stylesheet" />
     </Head>
     <GlobalStyle />
     <Component {...pageProps} />

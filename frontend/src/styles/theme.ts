@@ -8,7 +8,8 @@ export default {
       roboto: 'Roboto, sans-serif'
     },
     weight: {
-      regular: 400
+      regular: 400,
+      bold: 700
     },
     sizes: {
       small: '12px',
@@ -20,7 +21,7 @@ export default {
     }
   },
   colors: {
-    primary: '#000000',
+    primary: '#0C0B0B',
     secondary: '#ffffff',
     tertiary: '#F5F5F7'
   },
