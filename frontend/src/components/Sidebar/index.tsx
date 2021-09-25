@@ -24,7 +24,7 @@ export function Sidebar () {
           </Link>
         </S.MenuLink>
         <S.MenuLink>
-          <Link href="">
+          <Link href="/estudantes">
             <a>
               <img src="/icons/user.svg" />
               <p>Estudantes</p>
