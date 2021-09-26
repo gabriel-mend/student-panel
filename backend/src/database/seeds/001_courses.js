@@ -7,15 +7,15 @@ exports.seed = function(knex) {
       return knex('courses').insert([
         { 
           name: 'Medicina',
-          workload: 8,
+          workload: 80,
         },
         { 
           name: 'Administração',
-          workload: 4,
+          workload: 40,
         },
         { 
           name: 'Direito',
-          workload: 8,
+          workload: 80,
         },
       ]);
     });

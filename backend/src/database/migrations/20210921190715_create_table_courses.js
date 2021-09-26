@@ -5,7 +5,6 @@ exports.up = (knex) => knex.schema.createTable('courses', table => {
   table.text('workload').notNullable()
   
   table.timestamp('created_at').defaultTo(knex.fn.now())
-  table.timestamp('updated_at').defaultTo(knex.fn.now())
 })
 
 

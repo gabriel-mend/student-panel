@@ -58,7 +58,7 @@ function Index() {
           <tbody>
             {courses.map(({id, name, workload}) => (
               <S.ListItem>
-                <td>{id}</td>
+                <td className="table-id">{id}</td>
                 <td>{name}</td>
                 <td>{workload} horas</td>
                 <td>

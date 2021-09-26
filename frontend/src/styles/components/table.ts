@@ -34,6 +34,10 @@ export const ListItem = styled.tr`
       font-size: ${theme.font.sizes.medium};
     }
 
+    .table-id {
+      width: 50px;
+    }
+
     td:first-child,
     th:first-child {
       border-radius: 14px 0 0 14px;

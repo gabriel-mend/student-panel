@@ -60,6 +60,7 @@ function Index() {
               <th>Curso</th>
               <th>CPF</th>
               <th>CEP</th>
+              <th>Endereço</th>
               <th>Telefone</th>
               <th style={{ width: "100px" }}></th>
             </tr>
@@ -76,12 +77,13 @@ function Index() {
               phone
             }) => (
               <S.ListItem key={id}>
-                <td>{id}</td>
+                <td className="table-id">{id}</td>
                 <td>{username}</td>
                 <td>{email}</td>
                 <td>{name}</td>
                 <td>{cpf}</td>
                 <td>{cep}</td>
+                <td>{andress}</td>
                 <td>{phone}</td>
                 <td>
                   <S.ButtonOptions>
