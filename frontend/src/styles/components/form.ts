@@ -1,6 +1,6 @@
 import styled, { css, ThemeContext } from "styled-components";
 
-export const FormCreate = styled.div`
+export const FormCreate = styled.form`
   ${({ theme }) => css`
     display: grid;
     grid-template-columns: 1fr 1fr;
