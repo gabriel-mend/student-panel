@@ -1,9 +1,10 @@
-import { GetServerSideProps } from 'next'
 import { api } from 'services/api'
 import { List } from 'components/List'
+import { toast, ToastContainer } from 'react-toastify';
 
 import * as S from '../../styles/components/table'
 import { useEffect, useState } from 'react'
+import router from 'next/router'
 
 interface StudentProps {
   id: number
@@ -20,11 +21,20 @@ function Index() {
   const [students, setStudents] = useState<StudentProps[]>([])
 
   async function handleDelete(id: number) {
-    const studentsNewArray = students.filter(student => student.id !== id)
-    
-    await api.delete(`/students/${id}`) 
-    
-    return setStudents(studentsNewArray)
+    try {
+      const studentsNewArray = students.filter(student => student.id !== id)
+
+      await api.delete(`/students/${id}`) 
+
+      toast.success('Estudante deletado!')
+      return setStudents(studentsNewArray)
+    } catch(error) {
+      toast.error('Erro ao deletar!')
+    }
+  }
+
+  function handleEdit(id) {
+    return router.push(`/estudantes/edit/${id}`)
   }
 
   useEffect(() => {
@@ -75,7 +85,7 @@ function Index() {
                 <td>{phone}</td>
                 <td>
                   <S.ButtonOptions>
-                    <button>
+                    <button onClick={() => handleEdit(id)}>
                       <img src="./icons/edit.svg" />
                     </button>
                     <button onClick={() => handleDelete(id)}>

@@ -3,6 +3,7 @@ import { GlobalStyle } from "styles/global"
 import theme from "styles/theme"
 import Head from 'next/head'
 import { Main } from "components/Main"
+import 'react-toastify/dist/ReactToastify.min.css'; 
 
 function MyApp({ Component, pageProps }) {
   return <ThemeProvider theme={theme}>

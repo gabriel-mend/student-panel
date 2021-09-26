@@ -1,5 +1,7 @@
 import { List } from 'components/List'
+import { useRouter } from 'next/dist/client/router'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import { api } from 'services/api'
 
 import * as S from '../../styles/components/table'
@@ -11,14 +13,24 @@ interface CourseProps {
 }
 
 function Index() {
+  const router = useRouter()
   const [courses, setCourses] = useState<CourseProps[]>([])
 
   async function handleDelete(id: number) {
-    const coursesNewArray = courses.filter(course => course.id !== id)
+    try {
+      const coursesNewArray = courses.filter(course => course.id !== id)
     
-    await api.delete(`/courses/${id}`) 
+      await api.delete(`/courses/${id}`) 
 
-    return setCourses(coursesNewArray)
+      toast.success('Curso deletado!')
+      return setCourses(coursesNewArray)
+    } catch(error) {
+      toast.error('Erro ao deletar!')
+    }
+  }
+
+  function handleEdit(id) {
+    return router.push(`/cursos/edit/${id}`)
   }
 
   useEffect(() => {
@@ -51,7 +63,7 @@ function Index() {
                 <td>{workload} horas</td>
                 <td>
                   <S.ButtonOptions>
-                    <button>
+                    <button onClick={() => handleEdit(id)}>
                       <img src="./icons/edit.svg" />
                     </button>
                     <button onClick={() => handleDelete(id)}>

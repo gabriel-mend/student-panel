@@ -1,9 +1,9 @@
-import * as S from '../../styles/components/form'
+import * as S from '../../../styles/components/form'
 import InputMask from 'react-input-mask';
 import { Form } from "components/Form";
 import { useEffect, useState } from 'react';
 import { api } from 'services/api';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
 interface CourseProps {
@@ -12,6 +12,7 @@ interface CourseProps {
 }
 
 export default function Create() {
+  const router = useRouter()
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [cpf, setCpf] = useState('')
@@ -24,7 +25,7 @@ export default function Create() {
   async function handleSubmit(e) {
     e.preventDefault()
     try {
-      await api.post('students', {
+      await api.put(`students/${router.query.id}`, {
         username, 
         email,
         phone,
@@ -33,10 +34,10 @@ export default function Create() {
         cpf,
         course_id: Number(course)
       })
-      toast.success('Estudante criado!')
+      toast.success('Estudante editado!')
       router.back()
-    } catch(err) {
-      return toast.error('Erro ao criar estudante!')
+    } catch(error) {
+      return toast.error('Erro ao editar estudante!')
     }
   }
 
@@ -50,7 +51,7 @@ export default function Create() {
 
   return (
     <Form
-      title="Criar estudante"
+      title="Editar estudante"
     >
       <S.FormCreate onSubmit={handleSubmit}>
         <S.Input>

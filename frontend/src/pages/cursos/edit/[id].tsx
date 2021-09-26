@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import * as S from '../../styles/components/form'
+import * as S from '../../../styles/components/form'
 import { Form } from "components/Form"
 import { api } from 'services/api'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 
 interface CourseProps {
@@ -11,6 +11,7 @@ interface CourseProps {
 }
 
 export default function Create() {
+  const router = useRouter()
   const [name, setName] = useState('')
   const [workload, setWorkload] = useState('')
 
@@ -18,20 +19,20 @@ export default function Create() {
     e.preventDefault()
 
     try {
-      await api.post<CourseProps>('courses', {
+      await api.put<CourseProps>(`courses/${router.query.id}`, {
         name,
         workload
       })
-      toast.success('Curso criado!')
+      toast.success('Curso editado!')
       router.back()
     } catch(error) {
-      return toast.error('Erro ao criar curso!')
+      return toast.error('Erro ao editar estudante!')
     }
   }
 
   return (
     <Form
-      title="Criar cursos"
+      title="Editar curso"
     >
       <S.FormCreate onSubmit={handleSubmit}>
         <S.Input>
