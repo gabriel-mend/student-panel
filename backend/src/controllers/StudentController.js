@@ -1,20 +1,11 @@
 const knex = require('../database')
 
 module.exports = {
-  async index(req, res) {
+  async index(req, res, next) {
     try {
-      const { course_id } = req.query
-
-      const query = knex('students')
-
-      if(course_id) {
-        query
-          .where({ course_id })
-          .join('courses', 'courses.id', '=', 'students.course_id')
-          .select('students.*', 'courses.name')
-      }
-
-      const results = await query 
+      const results = await knex('students')
+        .join('courses', 'courses.id', '=', 'students.course_id')
+        .select('students.*', 'courses.name')
 
       return res.json(results)
     } catch(error) {

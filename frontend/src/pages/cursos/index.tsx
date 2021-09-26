@@ -1,8 +1,33 @@
 import { List } from 'components/List'
+import { useEffect, useState } from 'react'
+import { api } from 'services/api'
 
 import * as S from '../../styles/components/table'
 
-export default function Index() {
+interface CourseProps {
+  id: number
+  name: string
+  workload: string
+}
+
+function Index() {
+  const [courses, setCourses] = useState<CourseProps[]>([])
+
+  async function handleDelete(id: number) {
+    const coursesNewArray = courses.filter(course => course.id !== id)
+    
+    await api.delete(`/courses/${id}`) 
+
+    return setCourses(coursesNewArray)
+  }
+
+  useEffect(() => {
+    const fethCourses = async () => {
+      const { data } = await api.get<CourseProps[]>('courses')
+      return setCourses(data)
+    }
+    fethCourses()
+  }, [])
   return (
     <S.Wrapper>
       <List
@@ -19,39 +44,28 @@ export default function Index() {
             </tr>
           </thead>
           <tbody>
-            <S.ListItem>
-              <td>1</td>
-              <td>Medicina</td>
-              <td>40 horas</td>
-              <td>
-                <S.ButtonOptions>
-                  <button>
-                    <img src="./icons/edit.svg" />
-                  </button>
-                  <button>
-                    <img src="./icons/delete.svg" />
-                  </button>
-                </S.ButtonOptions>
-              </td>
-            </S.ListItem>
-            <S.ListItem>
-              <td>2</td>
-              <td>Direito</td>
-              <td>60 horas</td>
-              <td>
-                <S.ButtonOptions>
-                  <button>
-                    <img src="./icons/edit.svg" />
-                  </button>
-                  <button>
-                    <img src="./icons/delete.svg" />
-                  </button>
-                </S.ButtonOptions>
-              </td>
-            </S.ListItem>
+            {courses.map(({id, name, workload}) => (
+              <S.ListItem>
+                <td>{id}</td>
+                <td>{name}</td>
+                <td>{workload} horas</td>
+                <td>
+                  <S.ButtonOptions>
+                    <button>
+                      <img src="./icons/edit.svg" />
+                    </button>
+                    <button onClick={() => handleDelete(id)}>
+                      <img src="./icons/delete.svg" />
+                    </button>
+                  </S.ButtonOptions>
+                </td>
+              </S.ListItem>
+            ))}
           </tbody>
         </S.Table>
       </List>
     </S.Wrapper>
   )
 }
+
+export default Index

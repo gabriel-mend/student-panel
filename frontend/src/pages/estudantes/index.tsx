@@ -1,7 +1,40 @@
+import { GetServerSideProps } from 'next'
+import { api } from 'services/api'
 import { List } from 'components/List'
-import * as S from '../../styles/components/table'
 
-export default function Index() {
+import * as S from '../../styles/components/table'
+import { useEffect, useState } from 'react'
+
+interface StudentProps {
+  id: number
+  username: string
+  email: string
+  cpf: string
+  cep: string
+  andress: string
+  name: string
+  phone: string
+}
+
+function Index() {
+  const [students, setStudents] = useState<StudentProps[]>([])
+
+  async function handleDelete(id: number) {
+    const studentsNewArray = students.filter(student => student.id !== id)
+    
+    await api.delete(`/students/${id}`) 
+    
+    return setStudents(studentsNewArray)
+  }
+
+  useEffect(() => {
+    const fethCourses = async () => {
+      const { data } = await api.get<StudentProps[]>('students')
+      return setStudents(data)
+    }
+    fethCourses()
+  }, [])
+
   return (
     <S.Wrapper>
       <List
@@ -22,28 +55,41 @@ export default function Index() {
             </tr>
           </thead>
           <tbody>
-            <S.ListItem>
-              <td>1</td>
-              <td>Gabriel Mendonça Pereira</td>
-              <td>crowofcode@gmail.com</td>
-              <td>123.123.123-81</td>
-              <td>Rua 5 avenida</td>
-              <td>65066-210</td>
-              <td>989898989898</td>
-              <td>
-                <S.ButtonOptions>
-                  <button>
-                    <img src="./icons/edit.svg" />
-                  </button>
-                  <button>
-                    <img src="./icons/delete.svg" />
-                  </button>
-                </S.ButtonOptions>
-              </td>
-            </S.ListItem>
+            {students.map(({
+              id,
+              username,
+              name,
+              cpf,
+              andress,
+              cep,
+              email,
+              phone
+            }) => (
+              <S.ListItem key={id}>
+                <td>{id}</td>
+                <td>{username}</td>
+                <td>{email}</td>
+                <td>{name}</td>
+                <td>{cpf}</td>
+                <td>{cep}</td>
+                <td>{phone}</td>
+                <td>
+                  <S.ButtonOptions>
+                    <button>
+                      <img src="./icons/edit.svg" />
+                    </button>
+                    <button onClick={() => handleDelete(id)}>
+                      <img src="./icons/delete.svg" />
+                    </button>
+                  </S.ButtonOptions>
+                </td>
+              </S.ListItem>
+            ))}
           </tbody>
         </S.Table>
       </List>
     </S.Wrapper>
   )
 }
+
+export default Index

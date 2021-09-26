@@ -1,6 +1,16 @@
+import { GetServerSideProps } from 'next'
+import { api } from 'services/api'
 import * as S from '../styles/pages/home'
 
-export default function Home() {
+interface HomeProps {
+  data: [{
+    id: number
+    username: string
+    name: string
+  }]
+}
+
+export default function Home({ data }: HomeProps) {
   return (
     <S.Wrapper>
       <S.Banner>
@@ -22,19 +32,25 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-            <S.ListItem>
-              <td>1</td>
-              <td>Gabriel Mendonça</td>
-              <td>Medicina</td>
-            </S.ListItem>
-            <S.ListItem>
-              <td>1</td>
-              <td>Gabriel Mendonça</td>
-              <td>Medicina</td>
-            </S.ListItem>
+            {data.map(({ id, name, username}) => (
+              <S.ListItem>
+                <td>{id}</td>
+                <td>{username}</td>
+                <td>{name}</td>
+              </S.ListItem>
+            ))}
           </tbody>
         </S.Table>
       </S.List>
     </S.Wrapper>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { data } = await api.get('/students')
+  return {
+    props: {
+      data
+    }
+  }
 }
