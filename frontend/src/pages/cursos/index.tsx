@@ -6,10 +6,11 @@ import { api } from 'services/api'
 
 import * as S from '../../styles/components/table'
 
-interface CourseProps {
+export interface CourseProps {
   id: number
   name: string
   workload: string
+  created_at: string
 }
 
 function Index() {
@@ -45,6 +46,8 @@ function Index() {
       <List
         title="Lista de cursos"
         link="/cursos/criar"
+        dataExport={courses}
+        tableName="lista-de-cursos"
       >
         <S.Table>
           <thead>
@@ -57,7 +60,7 @@ function Index() {
           </thead>
           <tbody>
             {courses.map(({id, name, workload}) => (
-              <S.ListItem>
+              <S.ListItem key={id}>
                 <td className="table-id">{id}</td>
                 <td>{name}</td>
                 <td>{workload} horas</td>

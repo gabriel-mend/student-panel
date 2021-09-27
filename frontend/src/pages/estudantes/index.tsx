@@ -6,7 +6,7 @@ import * as S from '../../styles/components/table'
 import { useEffect, useState } from 'react'
 import router from 'next/router'
 
-interface StudentProps {
+export interface StudentProps {
   id: number
   username: string
   email: string
@@ -15,6 +15,7 @@ interface StudentProps {
   andress: string
   name: string
   phone: string
+  created_at: string
 }
 
 function Index() {
@@ -50,6 +51,8 @@ function Index() {
       <List
         title="Lista de estudantes"
         link="/estudantes/criar"
+        tableName="lista-de-estudantes"
+        dataExport={students}
       >
         <S.Table>
           <thead>

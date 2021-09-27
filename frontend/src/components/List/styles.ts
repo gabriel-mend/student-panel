@@ -13,6 +13,18 @@ export const List = styled.div`
       font-size: ${theme.font.sizes.xxlarge};
       margin-bottom: 12px;
     }
+
+    > button {
+      padding: 12px 32px;
+      height: 40px;
+      font-family: ${theme.font.family.roboto};
+      font-size: ${theme.font.sizes.small};
+      background-color: ${theme.colors.primary};
+      border: none;
+      border-radius: 8px;
+      color: ${theme.colors.secondary};
+      cursor: pointer;
+    }
   `}
 `
 
