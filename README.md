@@ -16,6 +16,7 @@ student-panel - É um sistema para gerenciamento de estudantes e cursos, onde se
 * [Knex](https://knexjs.org)
 * [Express](https://expressjs.com/pt-br/)
 * [Nodejs](https://nodejs.org/en/)
+* [Postgres](https://www.postgresql.org)
 
 ## 🚀 Como executar o projeto
 
