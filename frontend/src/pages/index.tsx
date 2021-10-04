@@ -33,7 +33,7 @@ export default function Home({ data }: HomeProps) {
           </thead>
           <tbody>
             {data.map(({ id, name, username}) => (
-              <S.ListItem>
+              <S.ListItem key={id}>
                 <td>{id}</td>
                 <td>{username}</td>
                 <td>{name}</td>
