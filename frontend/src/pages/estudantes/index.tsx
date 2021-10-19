@@ -16,6 +16,7 @@ export interface StudentProps {
   name: string
   phone: string
   created_at: string
+  course_id: string
 }
 
 function Index() {

@@ -71,5 +71,17 @@ module.exports = {
     } catch(error) {
       next(error)
     }
+  },
+  async getStudent(req, res, next) {
+    try {
+      const { id } = req.params
+
+      const student = await knex('students').where({ id })
+
+      return res.send(student[0])
+      
+    } catch(error) {
+      next(error)
+    }
   }
 }

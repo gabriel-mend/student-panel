@@ -8,6 +8,7 @@ const UserController = require('./controllers/UserController')
 
 //Enitity: Students
 routes.get('/students', StudentController.index)
+routes.get('/student/:id', StudentController.getStudent)
 routes.post('/students', StudentController.create)
 routes.put('/students/:id', StudentController.update)
 routes.delete('/students/:id', StudentController.delete)

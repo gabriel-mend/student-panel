@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { api } from 'services/api';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { StudentProps } from '..';
 
 interface CourseProps {
   id: number
@@ -20,6 +21,7 @@ export default function Create() {
   const [andress, setAndress] = useState('')
   const [phone, setPhone] = useState('')
   const [course, setCourse] = useState('')
+  
   const [courses, setCourses] = useState<CourseProps[]>([])
 
   async function handleSubmit(e) {
@@ -40,6 +42,8 @@ export default function Create() {
       return toast.error('Erro ao editar estudante!')
     }
   }
+  
+  
 
   useEffect(() => {
     const fethCourses = async () => {
@@ -47,6 +51,20 @@ export default function Create() {
       setCourses(data)
     }
     fethCourses()
+
+    const getData = async () => {
+      const { data } = await api.get<StudentProps>(`/student/${router.query.id}`)
+
+      setUsername(data.username)
+      setEmail(data.email)
+      setPhone(data.phone)
+      setAndress(data.andress)
+      setCep(data.cep)
+      setCpf(data.cpf)
+      setCourse(data.course_id)
+    }
+
+    getData()
   }, [])
 
   return (
@@ -65,9 +83,8 @@ export default function Create() {
         <S.Input>
           <label>Curso</label>
           <select name="course" onChange={(e) => setCourse(e.target.value)}>
-            <option value="" selected disabled hidden>Selecione um curso</option>
-            {courses.map(course => (
-              <option value={course.id} key={course.id}>{course.name}</option>
+            {courses.map(({ id, name }) => (
+              <option value={id} key={id} selected={id === Number(course)} >{name}</option>
             ))}
           </select>
         </S.Input>
