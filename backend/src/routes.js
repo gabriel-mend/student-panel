@@ -15,6 +15,7 @@ routes.delete('/students/:id', StudentController.delete)
 
 // Enitity: Courses
 routes.get('/courses', CourseController.index)
+routes.get('/course/:id', CourseController.getCourse)
 routes.post('/courses', CourseController.create)
 routes.put('/courses/:id', CourseController.update)
 routes.delete('/courses/:id', CourseController.delete)

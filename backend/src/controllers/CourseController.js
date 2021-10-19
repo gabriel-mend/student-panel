@@ -28,11 +28,13 @@ module.exports = {
       } = req.body
 
       const { id } = req.params
+      
 
       await knex('courses').update({ 
         name, 
         workload
       }).where({ id })
+
       return res.send()
     } catch(error) {
       next(error)
@@ -47,6 +49,18 @@ module.exports = {
         .del()
 
       return res.send()
+    } catch(error) {
+      next(error)
+    }
+  },
+  async getCourse(req, res, next) {
+    try {
+      const { id } = req.params
+
+      const course = await knex('courses').where({ id })
+
+      return res.send(course[0])
+      
     } catch(error) {
       next(error)
     }

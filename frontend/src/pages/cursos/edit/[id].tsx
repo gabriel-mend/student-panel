@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as S from '../../../styles/components/form'
 import { Form } from "components/Form"
 import { api } from 'services/api'
@@ -19,16 +19,33 @@ export default function Create() {
     e.preventDefault()
 
     try {
+      console.log({
+        name,
+        workload
+      })
       await api.put<CourseProps>(`courses/${router.query.id}`, {
         name,
         workload
       })
+
       toast.success('Curso editado!')
       router.back()
     } catch(error) {
       return toast.error('Erro ao editar estudante!')
     }
   }
+
+  
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await api.get<CourseProps>(`/course/${router.query.id}`) 
+      
+      setName(data.name)
+      setWorkload(data.workload)
+      return
+    } 
+    getData()
+  }, [])
 
   return (
     <Form
