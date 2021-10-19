@@ -4,6 +4,7 @@ import theme from "styles/theme"
 import Head from 'next/head'
 import { Main } from "components/Main"
 import 'react-toastify/dist/ReactToastify.min.css'; 
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 function MyApp({ Component, pageProps }) {
   return <ThemeProvider theme={theme}>

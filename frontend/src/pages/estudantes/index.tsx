@@ -19,6 +19,8 @@ export interface StudentProps {
   course_id: string
 }
 
+
+
 function Index() {
   const [students, setStudents] = useState<StudentProps[]>([])
 
