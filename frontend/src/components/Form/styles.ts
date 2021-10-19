@@ -6,3 +6,17 @@ export const Container = styled.div`
     padding: 64px 84px;
   `}
 `
+
+export const Back = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    line-height: 100%;
+    cursor: pointer;
+    margin-bottom: 32px;
+
+    > img {
+      margin-right: 10px;
+    }
+  `}
+`
